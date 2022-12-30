@@ -15,7 +15,7 @@ def create_user(user: schemas.InUser, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return {"data": new_user}
 
-@app.get("/friendship")
+@app.get("/friend", status_code=status.HTTP_201_CREATED)
 def create_friendship(user_id: int, friend_id: int, db: Session = Depends(get_db)):
     new_friendship = models.Friendship(user_id=user_id, friend_id=friend_id)
     db.add(new_friendship)
@@ -72,6 +72,23 @@ def delete_user(id: int, db: Session = Depends(get_db)):
                     detail="user with id: {id} does not exist")
 
     user_query.delete(synchronize_session=False)
+
+    db.commit()
+
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+@app.delete("/friend", status_code=status.HTTP_204_NO_CONTENT)
+def delete_friend(user_id: int, friend_id: int, db: Session = Depends(get_db)):
+    friendship_query = db.query(models.Friendship).filter(models.Friendship.user_id == user_id and 
+        models.Friendship.friend_id == friend_id)
+
+    friendship = friendship_query.first()
+
+    if friendship == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                    detail="This users are not friends")
+
+    friendship_query.delete(synchronize_session=False)
 
     db.commit()
 
