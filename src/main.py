@@ -1,14 +1,14 @@
-from fastapi import FastAPI, HTTPException, Response, status, Depends
-from . import models, schemas
-from .database import engine, get_db
-from .routers import user, friendship
+from fastapi import FastAPI
+from . import models
+from .database import engine
+from .routers import friend_repository, user_router
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
     
-app.include_router(user.router)
-app.include_router(friendship.router)
+app.include_router(user_router.router)
+app.include_router(friend_repository.router)
 
 
 @app.get("/")
