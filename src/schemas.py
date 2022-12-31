@@ -16,3 +16,10 @@ class InUser(BaseModel):
 
     class Config:
         orm_mode = True
+
+class InFriend(BaseModel):
+    user_id: int
+    friend_id: int
+
+    class Config:
+        orm_mode = True
