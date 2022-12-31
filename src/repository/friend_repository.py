@@ -18,7 +18,7 @@ def get_friends(id: int, db: Session):
 
 def get_friend(user_id: int, friend_id: int, db: Session):
     return db.query(models.Friendship).filter(models.Friendship.user_id==user_id,
-    models.Friendship.friend_id==friend_id).first()
+                    models.Friendship.friend_id==friend_id).first()
    
 
 def delete_friend(delete_friend: schemas.InFriend, db: Session):
