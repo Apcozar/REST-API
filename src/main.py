@@ -14,4 +14,4 @@ app.include_router(friend_router.router)
 
 @app.get("/")
 def root():
-    return {"message": "To interact directly with the appy, add /docs to the url"}
+    return {"message": "To interact directly with the API, add /docs to the url"}
