@@ -16,4 +16,4 @@ Social Network REST API for Rive Interview
 2.- Install sqlalchemy: "pip install sqlalchemy" and set entity with SQLAlchemy ORM.
 3.- Install alembic for database migrations
 ## Implement the API endpoints and their corresponding functions to manage these relationships. This might include endpoints for retrieving a list of friends for a user, as well as endpoints for adding or removing friends. Handle errors and exceptions that may occur during API requests, such as if a user tries to add a friend that does not exist.
-1.- 
+1.- /TO DO set up routers to decouple functionalities
