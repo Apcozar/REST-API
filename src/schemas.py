@@ -1,15 +1,7 @@
 from pydantic import BaseModel
 
-class OutUser(BaseModel):
-    name: str
-    surname: str
-    description: str
-    
-    class Config:
-        orm_mode = True
 
-
-class InUser(BaseModel):
+class Users(BaseModel):
     name: str
     surname: str
     description: str
@@ -17,7 +9,7 @@ class InUser(BaseModel):
     class Config:
         orm_mode = True
 
-class InFriend(BaseModel):
+class Friendships(BaseModel):
     user_id: int
     friend_id: int
 

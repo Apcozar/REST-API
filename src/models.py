@@ -4,20 +4,20 @@ from sqlalchemy.sql.sqltypes import TIMESTAMP
 from .database import Base
 
 
-class User(Base):
-    __tablename__ = "user"
+class Users(Base):
+    __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, nullable=False)
+    user_id = Column(Integer, primary_key=True, nullable=False)
     name = Column(String, nullable=False)
     surname = Column(String, nullable=False)
     description = Column(String, nullable=False)
     creationTime = Column(TIMESTAMP(timezone=True), nullable=False, 
                     server_default=text("now()"))
 
-class Friendship(Base):
-    __tablename__ = "friendship"
+class Friendships(Base):
+    __tablename__ = "friendships"
 
-    user_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), primary_key=True)
-    friend_id = Column(Integer, ForeignKey("user.id", ondelete="CASCADE"), primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), primary_key=True)
+    friend_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), primary_key=True)
     creationTime = Column(TIMESTAMP(timezone=True), nullable=False, 
                     server_default=text("now()"))

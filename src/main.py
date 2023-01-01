@@ -2,14 +2,14 @@ from fastapi import FastAPI
 
 from . import models
 from .database import engine
-from .routers import user_router, friend_router
+from .routers import friendships_router, users_router
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
     
-app.include_router(user_router.router)
-app.include_router(friend_router.router)
+app.include_router(users_router.router)
+app.include_router(friendships_router.router)
 
 
 @app.get("/")
