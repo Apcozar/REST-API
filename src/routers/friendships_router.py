@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Response, status, HTTPException, Depends
 from sqlalchemy.orm import Session
 
-from ..database import get_db
+from ..db.database import get_db
 from ..schemas.friendships import FriendshipCreate
 from ..repository import friendships_repository
 
