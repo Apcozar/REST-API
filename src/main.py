@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from .models.base import Base
-from .db.database import engine
+from .db.session import engine
 from .routers.base import api_router
 
 def create_tables():
