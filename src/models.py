@@ -24,3 +24,4 @@ class Friendships(Base):
     friend_id = Column(Integer, ForeignKey("users.user_id", ondelete="CASCADE"), primary_key=True)
     creationTime = Column(TIMESTAMP(timezone=True), nullable=False, 
                     server_default=text("now()"))
+                    
