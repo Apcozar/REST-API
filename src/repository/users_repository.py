@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from ..models.users import Users
-from ..schemas.users import UserCreate
+from ..schemas.users import UserCreate, UserBase
 
 def create_user(db: Session, user: UserCreate):
     new_user = Users(
@@ -24,15 +24,15 @@ def get_user(id: int, db: Session):
     return db.query(Users).filter(Users.user_id == id).first()
 
 
-def update_user(id: int, updated_user: UserCreate, db: Session):
+def update_user(id: int, updated_user: UserBase, db: Session):
     existing_user = db.query(Users).filter(Users.user_id == id)
     
     if not existing_user.first():
         return None
-
-    existing_user.update(updated_user.dict(),synchronize_session=False)
-
+   
+    db.add(updated_user)
     db.commit()
+    db.refresh(updated_user)
 
     return updated_user
 

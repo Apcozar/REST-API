@@ -2,7 +2,7 @@ from fastapi import APIRouter, Response, status, HTTPException, Depends
 from sqlalchemy.orm import Session
 
 from ..db.database import get_db
-from ..schemas.users import UserCreate
+from ..schemas.users import UserCreate, UserBase
 from ..repository import users_repository
 
 router = APIRouter(
@@ -33,16 +33,23 @@ def get_user(id: int, db: Session = Depends(get_db)):
     return {"data": user}
 
 
-@router.post("/{id}")
-def update_user(id: int, updated_user: UserCreate, db: Session = Depends(get_db)):
+@router.patch("/{id}")
+def update_user(id: int, updated_user: UserBase, db: Session = Depends(get_db)):
 
-    updated = users_repository.update_user(id, updated_user, db)  
+    existing_user = users_repository.get_user(id, db)
 
-    if not updated:
+    if not existing_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                     detail="user with id: {id} does not exist")
+
+    updated_data = updated_user.dict(exclude_unset=True)
+
+    for key, value in updated_data.items():
+        setattr(existing_user, key, value)
+
+    users_repository.update_user(id, existing_user, db)  
          
-    return updated_user
+    return existing_user
 
 
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
