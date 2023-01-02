@@ -1,7 +1,8 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from .base import Base
+
 
 class Users(Base):
     __tablename__ = "users"

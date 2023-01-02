@@ -3,6 +3,7 @@ from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from .base import Base
 
+
 class Friendships(Base):
     __tablename__ = "friendships"
 
