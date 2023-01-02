@@ -1,9 +1,10 @@
 from sqlalchemy.orm import Session
-from .. import models, schemas
+from ..schemas.friendships import FriendshipCreate
+from ..models.friendships import Friendships
 
 
-def create_friend(create_friend: schemas.Friendships, db: Session):
-    new_friendship = models.Friendships(user_id=create_friend.user_id, 
+def create_friend(create_friend: FriendshipCreate, db: Session):
+    new_friendship = Friendships(user_id=create_friend.user_id, 
                             friend_id=create_friend.friend_id)
 
     db.add(new_friendship)
@@ -13,15 +14,15 @@ def create_friend(create_friend: schemas.Friendships, db: Session):
 
 
 def get_friends(id: int, db: Session):
-    return db.query(models.Friendships).filter(models.Friendships.user_id==id).all()
+    return db.query(Friendships).filter(Friendships.user_id==id).all()
 
 
 def get_friend(user_id: int, friend_id: int, db: Session):
-    return db.query(models.Friendships).filter(models.Friendships.user_id==user_id,
-                    models.Friendships.friend_id==friend_id).first()
+    return db.query(Friendships).filter(Friendships.user_id==user_id,
+                    Friendships.friend_id==friend_id).first()
    
 
-def delete_friend(delete_friend: schemas.Friendships, db: Session):
+def delete_friend(delete_friend: FriendshipCreate, db: Session):
     db.delete(delete_friend)
     db.commit()
     db.flush()

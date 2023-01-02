@@ -1,16 +1,26 @@
 from fastapi import FastAPI
 
-from . import models
+from .models.base import Base
 from .database import engine
 from .routers import friendships_router, users_router
 
-models.Base.metadata.create_all(bind=engine)
+def create_tables():
+    Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
-    
-app.include_router(users_router.router)
-app.include_router(friendships_router.router)
 
+def set_routers(app):
+    app.include_router(users_router.router)
+    app.include_router(friendships_router.router)
+
+
+def start_application():
+    app = FastAPI()
+    create_tables()
+    set_routers(app)
+    return app
+
+
+app = start_application()
 
 @app.get("/")
 def root():
