@@ -3,7 +3,9 @@ from .. import models, schemas
 
 
 def create_user(db: Session, user: schemas.Users):
-    new_user = models.Users(name=user.name, surname=user.surname, description=user.description)
+    new_user = models.Users(name=user.name, surname=user.surname, 
+                username=user.username, age=user.age, gender=user.gender)
+                
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
