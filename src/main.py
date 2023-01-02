@@ -4,6 +4,8 @@ from . import models
 from .database import engine
 from .routers import friendships_router, users_router
 
+models.Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
     
 app.include_router(users_router.router)
