@@ -27,7 +27,6 @@ def delete_friendship(delete_friendship: FriendshipBase, session: Session):
                             Friendships.user_id==delete_friendship.user_id,
                             Friendships.friend_id==delete_friendship.friend_id)
 
-
     if not existing_friendship.first():
         return None
     
