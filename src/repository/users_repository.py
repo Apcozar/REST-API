@@ -3,12 +3,7 @@ from ..models.users import Users
 from ..schemas.users import UserCreate, UserBase
 
 def create_user(user: UserCreate, session: Session):
-    new_user = Users(
-        name=user.name, 
-        surname=user.surname, 
-        username=user.username, 
-        age=user.age, 
-        gender=user.gender)
+    new_user = Users(**user.dict())
                 
     session.add(new_user)
     session.commit()

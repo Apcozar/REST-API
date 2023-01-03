@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from .base import Base
@@ -15,3 +15,4 @@ class Users(Base):
                     server_default=text("now()"))
     age = Column(Integer, nullable=False)
     gender = Column(String(length=20), nullable=False)
+    is_admin = Column(Boolean, nullable=False, default=False)

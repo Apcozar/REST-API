@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import List, Optional
 from pydantic import BaseModel
 
 
@@ -10,7 +10,21 @@ class UserBase(BaseModel):
     gender: Optional[str] = None
 
 
-class UserCreate(BaseModel):
+class UserCreate(UserBase):
+    name: str
+    surname: str
+    username: str
+    age: int
+    gender: str
+    is_admin: Optional[bool] = False
+
+
+    class Config:
+        orm_mode = True
+
+
+class UserOut(UserBase):
+    user_id: int
     name: str
     surname: str
     username: str

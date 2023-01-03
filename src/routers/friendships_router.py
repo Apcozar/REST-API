@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import APIRouter, Response, status, HTTPException, Depends
 from sqlalchemy.orm import Session
 
@@ -10,7 +11,7 @@ router = APIRouter(
     tags=["friendships"],
 )
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=FriendshipBase)
 def create_friendship(create_friendship: FriendshipBase, session: Session = Depends(get_session)):
     existing_user = users_repository.get_user(create_friendship.user_id, session)
     existing_friend = users_repository.get_user(create_friendship.friend_id, session)
@@ -30,13 +31,13 @@ def create_friendship(create_friendship: FriendshipBase, session: Session = Depe
                                 detail=f"user {create_friendship.user_id} is already friend of user {create_friendship.friend_id}")
     
     new_friendship = friendships_repository.create_friendship(create_friendship, session)
-    return {"data": new_friendship}
+    return  new_friendship
 
 
-@router.get("/{id}", status_code=status.HTTP_200_OK)
+@router.get("/{id}", status_code=status.HTTP_200_OK, response_model=List[FriendshipBase])
 def get_friendships(id: int, session: Session = Depends(get_session)):
     friendships = friendships_repository.get_friendships(id, session)
-    return {"data": friendships}
+    return friendships
 
 
 @router.delete("/", status_code=status.HTTP_204_NO_CONTENT)
