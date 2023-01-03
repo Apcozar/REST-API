@@ -9,17 +9,20 @@ def create_admins(session: Session):
     admin1 = Users(
         name = "admin",
         surname = "admin1",
-        username = "jsgdgfsgdfd",
+        username = "admin1",
         age = 0,
         gender = "",
-        email = "apcozar@gmail.com",
+        email = "admin@admin.com",
         password = hash("test"),
         is_admin = True
     )
 
-    session.add(admin1)
-    session.commit()
-    session.refresh(admin1)
+    existing_admin1 = session.query(Users).filter(Users.name == admin1.name).first()
+
+    if not existing_admin1:
+        session.add(admin1)
+        session.commit()
+        session.refresh(admin1)
 
 
 
