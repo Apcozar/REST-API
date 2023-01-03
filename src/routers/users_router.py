@@ -24,7 +24,13 @@ def create_user(user: UserCreate, session: Session = Depends(get_session),
 
     if existing_user:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT,
-                                detail=f"{user.username} username is already taken")
+                                detail=f"{user.username} username already taken")
+
+    existing_email = users_repository.get_user_by_email(user.email, session)
+
+    if existing_email:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT,
+                                detail=f"{user.email} email already taken")
 
     new_user = users_repository.create_user(user, session)
     return new_user
