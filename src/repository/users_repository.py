@@ -2,7 +2,7 @@ from sqlalchemy.orm import Session
 from ..models.users import Users
 from ..schemas.users import UserCreate, UserBase
 
-def create_user(session: Session, user: UserCreate):
+def create_user(user: UserCreate, session: Session):
     new_user = Users(
         name=user.name, 
         surname=user.surname, 
@@ -22,6 +22,9 @@ def get_users(session: Session):
 
 def get_user(id: int, session: Session):
     return session.query(Users).filter(Users.user_id == id).first()
+
+def get_user_by_username(username: str, session: Session):
+    return session.query(Users).filter(Users.username == username).first()
 
 
 def update_user(id: int, updated_user: UserBase, session: Session):

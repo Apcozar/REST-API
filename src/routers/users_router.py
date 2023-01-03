@@ -12,7 +12,13 @@ router = APIRouter(
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_user(user: UserCreate, session: Session = Depends(get_session)):
-    new_user = users_repository.create_user(session, user)
+    existing_user = users_repository.get_user_by_username(user.username, session)
+
+    if existing_user:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT,
+                                detail=f"{user.username} username is already taken")
+
+    new_user = users_repository.create_user(user, session)
     return {"data": new_user}
 
 
@@ -26,7 +32,7 @@ def get_users(session: Session = Depends(get_session)):
 def get_user(id: int, session: Session = Depends(get_session)):
     user = users_repository.get_user(id, session)
 
-    if user == None:
+    if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                     detail="user with id: {id} does not exist")
 
