@@ -9,6 +9,7 @@ class UserBase(BaseModel):
     age: Optional[int] = None
     gender: Optional[str] = None
 
+
 class UserCreate(BaseModel):
     name: str
     surname: str
