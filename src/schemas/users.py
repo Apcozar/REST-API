@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -21,6 +21,15 @@ class UserCreate(UserBase):
 
     class Config:
         orm_mode = True
+
+class UserAdminCreate(UserBase):
+    name: str
+    surname: str
+    username: str
+    age: int
+    gender: str
+    is_admin: bool
+
 
 
 class UserOut(UserBase):

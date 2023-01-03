@@ -1,10 +1,14 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from sqlmodel import Session
 
 from .models.base import Base
-from .db.session import engine
+from .db.session import engine, get_session
 from .routers.base import api_router
+from .db.create_admins import create_admins
+
 
 def create_tables():
+    Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
 
@@ -22,5 +26,9 @@ def start_application():
 app = start_application()
 
 @app.get("/")
-def root():
+def root(session: Session = Depends(get_session)):
+    create_admins(session)
+
     return {"message": "To interact directly with the API, add /docs to the url"}
+
+

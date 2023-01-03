@@ -13,8 +13,10 @@ Base = declarative_base()
 
 
 def get_session() -> Generator:
-    db = SessionLocal()
+    session = SessionLocal()
     try:
-        yield db
+        yield session
     finally:
-        db.close()
+        session.close()
+
+
