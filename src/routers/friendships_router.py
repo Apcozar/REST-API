@@ -20,10 +20,6 @@ def create_friendship(create_friendship: FriendshipBase, session: Session = Depe
     existing_user = users_repository.get_user(create_friendship.user_id, session)
     existing_friend = users_repository.get_user(create_friendship.friend_id, session)
 
-    if not existing_user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"user with id: {existing_user.used_id} does not exist")
-
     if not existing_friend or not cur_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
             detail=f"user with id: {existing_friend.used_id} does not exist")
