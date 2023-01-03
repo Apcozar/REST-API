@@ -10,7 +10,6 @@ class UserBase(BaseModel):
     gender: Optional[str] = None
 
 
-
 class UserCreate(BaseModel):
     name: str
     surname: str

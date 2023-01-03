@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from ..db.session import get_session
 from ..schemas.friendships import FriendshipBase
-from ..repository import friendships_repository
+from ..repository import friendships_repository, users_repository
 
 router = APIRouter(
     prefix="/friendships",
@@ -12,6 +12,17 @@ router = APIRouter(
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def create_friendship(create_friendship: FriendshipBase, session: Session = Depends(get_session)):
+    existing_user = users_repository.get_user(create_friendship.user_id, session)
+    existing_friend = users_repository.get_user(create_friendship.friend_id, session)
+
+    if not existing_user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"user with id: {existing_user.used_id} does not exist")
+
+    if not existing_friend:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"user with id: {existing_friend.used_id} does not exist")
+
     existing_friendship = friendships_repository.get_friendship(create_friendship.user_id, create_friendship.friend_id, session)
 
     if existing_friendship:
