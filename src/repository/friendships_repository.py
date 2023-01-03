@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from ..schemas.friendships import FriendshipBase
+from ..schemas.friendships_schemas import FriendshipBase
 from ..models.friendships import Friendships
 
 

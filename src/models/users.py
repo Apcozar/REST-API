@@ -15,4 +15,7 @@ class Users(Base):
                     server_default=text("now()"))
     age = Column(Integer, nullable=False)
     gender = Column(String(length=20), nullable=False)
+    email = Column(String(length=60), nullable=False, unique=True)
+    password = Column(String, nullable=False)
     is_admin = Column(Boolean, nullable=False, default=False)
+    

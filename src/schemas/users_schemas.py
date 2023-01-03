@@ -1,5 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class UserBase(BaseModel):
@@ -16,6 +16,8 @@ class UserCreate(UserBase):
     username: str
     age: int
     gender: str
+    email: EmailStr
+    password: str
     is_admin: Optional[bool] = False
 
 
@@ -39,6 +41,21 @@ class UserOut(UserBase):
     username: str
     age: int
     gender: str
+    email: EmailStr
 
     class Config:
         orm_mode = True
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    id: Optional[str] = None

@@ -1,8 +1,12 @@
 from sqlalchemy.orm import Session
 from ..models.users import Users
-from ..schemas.users import UserCreate, UserBase
+from ..schemas.users_schemas import UserCreate, UserBase
+from ..core import security
+
 
 def create_user(user: UserCreate, session: Session):
+    hased_pwd = security.hash(user.password)
+    user.password = hased_pwd
     new_user = Users(**user.dict())
                 
     session.add(new_user)
@@ -18,8 +22,13 @@ def get_users(session: Session):
 def get_user(id: int, session: Session):
     return session.query(Users).filter(Users.user_id == id).first()
 
+
 def get_user_by_username(username: str, session: Session):
     return session.query(Users).filter(Users.username == username).first()
+
+
+def get_user_by_email(email: str, session: Session):
+    return session.query(Users).filter(Users.email == email).first()
 
 
 def update_user(id: int, updated_user: UserBase, session: Session):

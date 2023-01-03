@@ -8,7 +8,7 @@ from .db.create_admins import create_admins
 
 
 def create_tables():
-    Base.metadata.drop_all(bind=engine)
+    #Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
 
