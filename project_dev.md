@@ -1,4 +1,4 @@
-# REST-API
+# REST-API //IN PROGRESS
 Social Network REST API for Rive Interview
 
 ## Set up a development environment with the Python framework and database you have chosen. This might involve installing the necessary software and libraries, as well as creating a new project or application.
