@@ -30,5 +30,3 @@ def root(session: Session = Depends(get_session)):
     create_admins(session)
 
     return {"message": "To interact directly with the API, add /docs to the url"}
-
-

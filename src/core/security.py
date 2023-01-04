@@ -51,6 +51,7 @@ def verify_access_token(token: str, exception):
      
     return token_data
 
+
 def get_current_user(token: str = Depends(oauth2_scheme), session: Session = Depends(get_session)):
     exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, 
                     detail=f"Coudl not validate credentials", 
