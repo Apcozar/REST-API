@@ -38,10 +38,10 @@ To save time to you, I deployed the app in heroku.
   <li> Authenticate with username: admin@admin.com and password: riveadmin </li>
 </ol>
 
-## API METHODS
+# API METHODS
 All the API methods have type validations since we are using schemas for response and requests.
 
-### users
+## users
 <ol>
   <li>user_id: private key to identify users</li>
   <li>name: string that identifies names</li>
@@ -58,29 +58,29 @@ We have two types of users, admins and basic users. Admins can execute all the m
 #### Get Users (admins and users)
 Fetches all the users, the response body follows the UserOut schema.
 
-#### Create User (admins only)
+### Create User (admins only)
 Creation of users, admin only operation, the request body follows the UserCreate schema. Checks if username or email are already taken, code 409 conflict
 
-#### Get User (admins and users)
+### Get User (admins and users)
 Gets the user by user_id. If the user does not exists, code 404: Not found.
 
-#### Delete User (admins and users)
+### Delete User (admins and users)
 With the user_id, admins can delete all the users while users can only delete themselves. If the user doesn't exists, code 404: not found.
 
-#### Update User (admins and users)
+### Update User (admins and users)
 With the user_id, admins can update all the users while users can only update themselves. There's no need to update all the fields. Checks if the user exists or if the username is not taken.
 
-### friendships
+## friendships
 Friendships are unidirectional, it only has two fields, user_id and frend_id. This represents that user_id is friend of friend_id, but friend_id is not friend of user_id. I wanted to do it similar to some social networks like instagram or twitter, where you can add someone as friend without the other person adding you.
 
 //TO DO
 boolean is_reciprocal and join when getting or store both ways and create an index.
 
-#### Create Friendships (admins and users)
+### Create Friendships (admins and users)
 With user_id and friend_id, admins can create any friendship, while users can only create relationships where they are the user_id. Checks if the users exist and if the relationship is already done.
 
-#### Delete Friendships (admins and users)
+### Delete Friendships (admins and users)
 With user_id and friend_id, admins can delete any existing relationship, while users can only delete relationships where they are the user_id. Checks if the current user is the user_id and if the relationship exists.
 
-#### Get Friendships (admins and users)
+### Get Friendships (admins and users)
 With user_id, any user can search the friends of any user.
