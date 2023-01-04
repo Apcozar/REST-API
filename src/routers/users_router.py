@@ -48,7 +48,7 @@ def get_user(id: int, session: Session = Depends(get_session), cur_user: int = D
 
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                    detail="user with id: {id} does not exist")
+                    detail=f"user with id: {id} does not exist")
 
     return user
 
@@ -60,7 +60,7 @@ def update_user(id: int, updated_user: UserBase, session: Session = Depends(get_
 
     if not existing_user or not cur_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                    detail="user with id: {id} does not exist")
+                    detail=f"user with id: {id} does not exist")
 
     if existing_user.user_id != cur_user.user_id and not cur_user.is_admin:
         raise HTTPException(
@@ -89,7 +89,7 @@ def delete_user(id: int, session: Session = Depends(get_session), cur_user: int 
 
     if not existing_user or not cur_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                    detail="user with id: {id} does not exist")
+                    detail=f"user with id: {id} does not exist")
 
     if existing_user.user_id != cur_user.user_id and not cur_user.is_admin or existing_user.is_admin:
         raise HTTPException(

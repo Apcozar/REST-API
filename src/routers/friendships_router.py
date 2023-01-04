@@ -56,7 +56,7 @@ def delete_friendship(delete_friendship: FriendshipBase, session: Session = Depe
 
     if not existing_friendship or not cur_user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                    detail="user with id: {user_id} is not friend of user {friend_id}")
+            detail=f"user with id: {delete_friendship.user_id} is not friend of user {delete_friendship.friend_id}")
 
     if existing_friendship.user_id != cur_user.user_id and not cur_user.is_admin:
         raise HTTPException(
