@@ -25,6 +25,7 @@ API LINK: https://social-network-rest-api.herokuapp.com/
       SECRET_KEY=09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
       ALGORITHM=HS256
       ACCESS_TOKEN_EXPIRE_MINUTES=60
+      ADMIN_PWD=riveadmin
   </li>
   <li>Run command to start the app: uvicorn src.main:app (--reload flag to reload when we save)</li>
   <li>Click the link with the app url to access it.</li>
