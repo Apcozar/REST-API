@@ -4,6 +4,8 @@ Social Network REST API project setup for Rive Interview
 ## DEPLOYED API
 To save time to you, I deployed the app in heroku.
 
+username: admin@admin.com
+password: riveadmin
 API LINK: https://social-network-rest-api.herokuapp.com/
 
 ## LOCAL SET UP
