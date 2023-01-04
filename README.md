@@ -35,4 +35,7 @@ To save time to you, I deployed the app in heroku.
   <li>Click the link with the app url to access it.</li>
   <li>Once we are in the root page, I setted a create an admin user for authorization purposes. This is not the best way to       do it, but I couldn't find any "post startup" to do it in the cleanest way. </li>
   <li>Read the page, and add /docs to the URL to try de API and read the openAPI documentation.</li>
+  <li> Authenticate with username: admin@admin.com and password: riveadmin </li>
 </ol>
+
+## API METHODS
